@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Nota } from './nota.entity';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { CreateNotaDto } from './dto/create-nota.dto';
 import { UpdateNotaDto } from './dto/update-nota.dto';
 
@@ -42,5 +42,13 @@ export class NotasService {
     if (result.affected === 0) {
       throw new NotFoundException(`Nota con ID ${id} no encontrada`);
     }
+  }
+  //Buscar por titulo
+  async findByTitle(title: string): Promise<Nota[]> {
+    return this.notasRepository.find({
+      where: {
+        title: Like(`%${title}%`),
+      },
+    });
   }
 }

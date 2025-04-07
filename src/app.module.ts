@@ -6,7 +6,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { Nota } from './notas/nota.entity';
 import { TareasModule } from './tareas/tareas.module';
-import { Tarea } from './tareas/tarea.entity';
 
 @Module({
   imports: [
@@ -17,7 +16,7 @@ import { Tarea } from './tareas/tarea.entity';
       username: 'root',
       password: '',
       database: 'notas_db',
-      entities: [Nota, Tarea],
+      entities: [Nota],
       synchronize: true,
     }),
     ConfigModule.forRoot({ isGlobal: true }),
@@ -27,4 +26,4 @@ import { Tarea } from './tareas/tarea.entity';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
